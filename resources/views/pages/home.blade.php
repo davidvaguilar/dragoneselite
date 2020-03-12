@@ -5,7 +5,7 @@
 	@if (isset($title))
 	<h3>{{ $title }}</h3>
 	@endif
-    @foreach($posts as $post)
+    @forelse($posts as $post)
 		<article class="post">
 			@include( $post->viewType('home') )
 
@@ -33,7 +33,13 @@
 				</footer>
 			</div>
 		</article>
-    @endforeach
+	@empty
+		<article class="post">
+			<div class="content-post">
+				<h1>No hay publicaciones todavia.</h1>
+			</div>
+		</article>
+    @forelse
 	<!--<article class="post w-image">
 			<figure><img src="img/img-post-1.png" alt="" class="img-responsive"></figure>
 			<div class="content-post">
@@ -236,7 +242,7 @@
     </section>
     
     <!-- fin del div.posts.container -->
-	{{ $posts->links() }}
+	{{ $posts->appends(request()->all())->links() }}
 	<!--<div class="pagination">
 		<ul class="list-unstyled container-flex space-center">
 			<li><a href="#" class="pagination-active">1</a></li>

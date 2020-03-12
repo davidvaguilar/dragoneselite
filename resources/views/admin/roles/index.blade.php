@@ -2,12 +2,12 @@
 
 @section('header')
     <h1>
-        Usuarios
+        Roles
         <small>Listado</small>
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-    <li class="active">Usuarios</li>
+    <li class="active">Roles</li>
     </ol>
 @stop
 
@@ -15,10 +15,10 @@
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Listado de usuarios</h3>
-            @can('create', $users->first())
-                <a href="{{ route('admin.users.create') }}" class="btn btn-primary pull-right">
-                    <i class="fa fa-plus"></i> Crear usuario
-                </a>
+            @can('create', $roles->first())
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary pull-right">
+                <i class="fa fa-plus"></i> Crear role
+            </a>
             @endcan
         </div>
         <!-- /.box-header -->
@@ -27,44 +27,40 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Identificador</th>
                         <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Roles</th>
+                        <th>Permisos</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $user)
+                    @foreach($roles as $role)
                         <tr> 
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>                            
-                            <td>{{ $user->getRoleNames()->implode(', ') }}</td>
+                            <td>{{ $role->id }}</td>
+                            <td>{{ $role->name }}</td>
+                            <td>{{ $role->display_name }}</td>   
+                            <td>{{ $role->permissions->pluck('display_name')->implode(', ') }}</td>                          
                             <td>
-                            @can('view', $user)
-                                <a href="{{ route('admin.users.show', $user) }}" 
-                                    class="btn btn-xs btn-default">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                            @endcan
-                            @can('update', $user)
-                                <a href="{{ route('admin.users.edit', $user) }}" 
+                                @can('update', $role)
+                                <a href="{{ route('admin.roles.edit', $role) }}" 
                                     class="btn btn-xs btn-info">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                            @endcan
-                            @can('delete', $user)
-                                <form method="POST" 
-                                    action="{{ route('admin.users.destroy', $user) }}" 
-                                    style="display: inline">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
-                                    <button type="submit" 
-                                        onclick="return confirm('¿Estas seguro de querer eliminar este usuario?')"
-                                        class="btn btn-xs btn-danger"
-                                    ><i class="fa fa-times"></i></button>
-                                </form>
-                            @endcan
+                                @endcan
+                                @can('delete', $role)
+                                    @if ($role->id !== 1)
+                                        <form method="POST" 
+                                            action="{{ route('admin.roles.destroy', $role) }}" 
+                                            style="display: inline">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" 
+                                                onclick="return confirm('¿Estas seguro de querer eliminar este role?')"
+                                                class="btn btn-xs btn-danger"
+                                            ><i class="fa fa-times"></i></button>
+                                        </form>
+                                    @endif
+                                @endcan                           
                             </td>
                         </tr>
                     @endforeach

@@ -2,7 +2,9 @@
     <div class="checkbox">
         <label>
         <input name="permissions[]" type="checkbox" value="{{ $name }}" 
-            {{ $user->permissions->contains($id) ? 'checked': ''}} >{{ $name }}
+            {{ $model->permissions->contains($id) 
+                    || collect(old('permission'))->contains($name) ? 'checked': ''}}>
+            {{ $name }}
         </label>
     </div>
 @endforeach

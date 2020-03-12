@@ -54,8 +54,16 @@ class Post extends Model
         if( auth()->user()->can('view', $this) ){   //if( auth()->user()->hasRole('Admin') ){
             return $query;
         } 
-        $posts = $query->where('user_id', auth()->id());
-        
+        return $query->where('user_id', auth()->id());
+    }
+
+    public function scopeByYearAndMonth($query)
+    {
+        $query->selectRaw('year(published_at) as year')
+                ->selectRaw('month(published_at) as month')                  
+                ->selectRaw('monthName(published_at) as monthname')                 
+                ->selectRaw('count(*) posts')
+                ->groupBy('year', 'month', 'monthname');  //     ->orderBy('published_at');                ->get();
     }
 
     public function isPublished(){

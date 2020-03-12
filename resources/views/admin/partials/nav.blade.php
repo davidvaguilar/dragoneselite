@@ -8,6 +8,7 @@
             <i class="fa fa-home"></i> <span>Inicio</span>
         </a>
     </li>
+   
     <li class="treeview {{ setActiveRoute('admin.posts.index') }}">
         <a href="#"><i class="fa fa-bars"></i> <span>Blog</span>
         <span class="pull-right-container">
@@ -15,21 +16,25 @@
             </span>
         </a>
         <ul class="treeview-menu">
+            @can('view', new App\Post)
             <li class="{{ setActiveRoute('admin.posts.index') }}">
                 <a href="{{ route('admin.posts.index') }}">
                     <i class="fa fa-eye"> Ver todos los posts</i>
                 </a>
             </li>
-            <li>
-                @if (request()->is('admin/posts/*'))
-                    <a href="{{ route('admin.posts.index', '#create') }}"><i class="fa fa-pencil"> Crear un post</i></a>
-                @else
-                    <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil"> Crear un post</i></a>
-                @endif
-            </li>
-        </ul>
+            @endcan
+            @can('view', new App\Post)
+                <li>
+                    @if (request()->is('admin/posts/*'))
+                        <a href="{{ route('admin.posts.index', '#create') }}"><i class="fa fa-pencil"> Crear un post</i></a>
+                    @else
+                        <a href="#" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil"> Crear un post</i></a>
+                    @endif
+                </li>
+            @endcan
+        </ul>   
     </li>
-
+    @can('view', new App\User)
     <li class="treeview {{ setActiveRoute(['admin.users.index', 'admin.users.create']) }}">
         <a href="#"><i class="fa fa-users"></i> <span>Usuarios</span>
         <span class="pull-right-container">
@@ -47,4 +52,25 @@
             </li>
         </ul>
     </li>
+    @else
+        <li class="{{ setActiveRoute(['admin.users.show', 'admin.users.edit']) }}">
+            <a href="{{ route('admin.users.show', auth()->user()) }}">
+                <i class="fa fa-user"></i> <span>Perfil</span>
+            </a>
+        </li>
+    @endcan
+    @can('view', new \Spatie\Permission\Models\Role)
+        <li class="{{ setActiveRoute(['admin.roles.index', 'admin.roles.edit']) }}">
+            <a href="{{ route('admin.roles.index') }}">
+                <i class="fa fa-pencil"></i> <span>Roles</span>
+            </a>
+        </li>
+    @endcan
+    @can('view', new \Spatie\Permission\Models\Permission)
+        <li class="{{ setActiveRoute(['admin.permissions.index', 'admin.permissions.edit']) }}">
+            <a href="{{ route('admin.permissions.index') }}">
+                <i class="fa fa-pencil"></i> <span>Permisos</span>
+            </a>
+        </li>
+    @endcan
 </ul>
