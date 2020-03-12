@@ -17,7 +17,8 @@ class PagesController extends Controller
                 ->latest('published_at')     //Ordenar desendennte
                 ->get();  */        
             
-        $query = Post::published();
+        //$query = Post::published();
+        $query = Post::with(['category', 'tags', 'owner', 'photos'])->published();
 
         if(request('month')){
             $query->whereMonth('published_at', request('month'));
@@ -25,6 +26,7 @@ class PagesController extends Controller
         if(request('year')){
             $query->whereYear('published_at', request('year'));
         }
+        
         $posts = $query->paginate();
         //$posts = Post::published()->paginate();
         //$posts = Post::published()->simplePaginate(1);  //ANTERIOR y siguiente
@@ -34,8 +36,7 @@ class PagesController extends Controller
     public function about(){
         return view('pages.about');
     }
-
-
+    
     public function archive(){
         
         //return Post::select('published_at')->groupBy('published_at')->get();

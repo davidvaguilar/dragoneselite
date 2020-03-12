@@ -11,9 +11,9 @@ class Post extends Model
         'title', 'url','body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
     ];
 
-    protected $dates = [
-        'published_at',
-    ];  // Instancia de Carbon
+    protected $dates = ['published_at'];  // Instancia de Carbon
+
+    //protected $with = (['category', 'tags', 'owner', 'photos']);   CUIDADO YA QUE CARGA pede formar loop
 
     protected static function boot(){
         parent::boot();

@@ -39,7 +39,7 @@
 				<h1>No hay publicaciones todavia.</h1>
 			</div>
 		</article>
-    @forelse
+    @endforelse
 	<!--<article class="post w-image">
 			<figure><img src="img/img-post-1.png" alt="" class="img-responsive"></figure>
 			<div class="content-post">
