@@ -22,19 +22,71 @@ class PostsTableSeeder extends Seeder
         Tag::truncate();
 
         $category = new Category;
-        $category->name = 'Categoria 1';
+        $category->name = 'General';
         $category->save();
 
         $category = new Category;
-        $category->name = 'Categoria 2';
+        $category->name = 'Promociones';
+        $category->save();
+
+        $category = new Category;
+        $category->name = 'Sociales';
         $category->save();
 
         $tag = new Tag;
-        $tag->name = 'Tag 1';
+        $tag->name = 'Happy Dragons';
         $tag->save();
 
         $tag = new Tag;
-        $tag->name = 'Tag 2';
+        $tag->name = 'Kids Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Jade Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Magic Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Tiffany Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Mercury Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Crystal Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Winehouse Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Stacy Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Black Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Gold Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Steel Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Jackson Dragons';
+        $tag->save();
+
+        $tag = new Tag;
+        $tag->name = 'Presley Dragons';
         $tag->save();
 
         $post = new Post;
@@ -47,7 +99,7 @@ class PostsTableSeeder extends Seeder
         $post->user_id = 1;
         $post->save();
 
-        $post->tags()->attach(Tag::create(['name' => 'etiqueta 1']));
+       // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
         $post = new Post;
         $post->title = "Mi segundo Post";
@@ -60,7 +112,7 @@ class PostsTableSeeder extends Seeder
         $post->save();
 
 
-        $post->tags()->attach(Tag::create(['name' => 'etiqueta 2']));
+       // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
         $post = new Post;
         $post->title = "Mi tercer Post";
@@ -73,7 +125,7 @@ class PostsTableSeeder extends Seeder
         $post->save();
 
         
-        $post->tags()->attach(Tag::create(['name' => 'etiqueta 2']));
+       // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
         $post = new Post;
         $post->title = "Mi cuarto Post";
@@ -86,6 +138,6 @@ class PostsTableSeeder extends Seeder
         $post->save();
 
         
-        $post->tags()->attach(Tag::create(['name' => 'etiqueta 2']));
+        //$post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
     }
 }

@@ -9,7 +9,7 @@
                         <tbody>
                             <tr>
                                 <td class="header" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 25px 0; text-align: center;">
-                                    <a target="_blank" rel="noopener noreferrer" href="{{ url('login') }}" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #bbbfc3; font-size: 19px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 white;">
+                                    <a target="_blank" rel="noopener noreferrer" href="{{ url('/') }}" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #bbbfc3; font-size: 19px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 white;">
                                         {{ config('app.name') }}
                                     </a>
                                 </td>
@@ -79,7 +79,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="content-cell" align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
-                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #AEAEAE; font-size: 12px; text-align: center;">© 2020 dyi. All rights reserved.</p>
+                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #AEAEAE; font-size: 12px; text-align: center;"><a href="www.dyi.cl"> © 2020 dyi. All rights reserved.</a></p>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -93,4 +93,4 @@
         </tbody>
     </table>
 </body>
-</html
+</html>
