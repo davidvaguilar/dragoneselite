@@ -13,15 +13,19 @@ class PhotosController extends Controller
     public function store(Post $post){
         //return 'procesando imagen...';
         //return request()->all();
-        $this->validate(request(),[
+        $this->validate(request(), [
             'photo' => 'required|image|max:2048'   //|dimensions:min_height
         ]);
         $photo = request()->file('photo');
-        $photoStore = $photo->store('posts', 'public');
-        //$photoUrl = Storage::url($photoStore);
 
+        $photoStore = $photo->store('posts'); // para public
+        //$photoStore = $photo->store('posts', 'public');  // para store
+        //$photoUrl = Storage::url($photoStore);   //codigo anterior
+
+        //dd($photoStore);
         $post->photos()->create([
-            'url' => Storage::url($photoStore),
+            'url' => '/img/'.$photoStore,
+            //'url' => Storage::url($photoStore),    // public_path().
         ]);
         /*Photo::create([
             'url' => Storage::url($photoStore),
