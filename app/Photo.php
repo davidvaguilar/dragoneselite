@@ -13,7 +13,9 @@ class Photo extends Model
         parent::boot();
         static::deleting(function($photo){
             //dd($photo->url);
-            Storage::disk('public')->delete($photo->url);
+            //Storage::disk('public')->delete($photo->url);
+            unlink(public_path().$photo->url);
+            //dd(Storage::delete($photo->url));
         });
     }
 }
