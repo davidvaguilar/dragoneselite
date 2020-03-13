@@ -17,7 +17,8 @@ class PagesController extends Controller
                 ->latest('published_at')     //Ordenar desendennte
                 ->get();  */        
             
-        $query = Post::published();
+        //$query = Post::published();
+        $query = Post::with(['category', 'tags', 'owner', 'photos'])->published();
 
         if(request('month')){
             $query->whereMonth('published_at', request('month'));
