@@ -82,15 +82,15 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $admin = new User;
-        $admin->name = 'David';
-        $admin->email = 'david@correo.cl';
+        $admin->name = 'David Villegas Aguilar';
+        $admin->email = 'david.villegas.aguilar@gmail.cl';
         $admin->password = '123123';
         $admin->save();
 
         $admin->assignRole($adminRole);
 
         $writer = new User;
-        $writer->name = 'Usuario Prueba';
+        $writer->name = 'gabriel';
         $writer->email = 'prueba@correo.cl';
         $writer->password = '123123';
         $writer->save();
