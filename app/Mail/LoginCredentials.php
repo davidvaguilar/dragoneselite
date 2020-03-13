@@ -26,12 +26,14 @@ class LoginCredentials extends Mailable
 
     /**
      * Build the message.
-     *
+     * 
      * @return $this
      */
     public function build()
     {
-        return $this->markdown('emails.login-credentials')
-                ->subject('Tus credenciales de acceso a '.config('app.name'));
+        /*return $this->markdown('emails.login-credentials')
+                ->subject('Tus credenciales de acceso a '.config('app.name'));*/
+                
+        return $this->view('emails.login-credentials');
     }
 }

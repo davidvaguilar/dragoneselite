@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Mail;
+use App\Mail\LoginCredentials;
 use Illuminate\Http\Request;
 use App\Events\UserWasCreated;
 use Spatie\Permission\Models\Role;
@@ -63,7 +65,9 @@ class UsersController extends Controller
         }
 
         //ENVIAR EMAIL EnviarCorreoConCredenciales
-        UserWasCreated::dispatch($user, $data['password']);
+        //UserWasCreated::dispatch($user, $data['password']); DESDE MAILSHIP
+        /* FIN ENVIO CORREO*/
+        Mail::to($user->email)->send(new LoginCredentials($user, $data['password']));
 
         return redirect()->route('admin.users.index')->withFlash('El usuario ha sido creado');
     }
