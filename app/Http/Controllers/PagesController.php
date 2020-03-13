@@ -25,6 +25,7 @@ class PagesController extends Controller
         if(request('year')){
             $query->whereYear('published_at', request('year'));
         }
+        
         $posts = $query->paginate();
         //$posts = Post::published()->paginate();
         //$posts = Post::published()->simplePaginate(1);  //ANTERIOR y siguiente
@@ -34,8 +35,7 @@ class PagesController extends Controller
     public function about(){
         return view('pages.about');
     }
-
-
+    
     public function archive(){
         
         //return Post::select('published_at')->groupBy('published_at')->get();
