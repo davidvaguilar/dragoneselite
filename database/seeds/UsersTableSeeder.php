@@ -90,11 +90,21 @@ class UsersTableSeeder extends Seeder
         $admin->assignRole($adminRole);
 
         $writer = new User;
-        $writer->name = 'gabriel';
-        $writer->email = 'prueba@correo.cl';
+        $writer->name = 'juan';
+        $writer->email = 'prueba1@correo.cl';
         $writer->password = '123123';
         $writer->save();
 
-        $writer->assignRole($writerRole);
+        $writer = new User;
+        $writer->name = 'pedro';
+        $writer->email = 'prueba2@correo.cl';
+        $writer->password = '123123';
+        $writer->save();
+
+        $writer = new User;
+        $writer->name = 'luis';
+        $writer->email = 'prueba3@correo.cl';
+        $writer->password = '123123';
+        $writer->save();
     }
 }

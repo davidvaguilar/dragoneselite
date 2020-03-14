@@ -99,6 +99,7 @@ class PostsTableSeeder extends Seeder
         $post->user_id = 1;
         $post->save();
 
+        $post->tags()->sync([1,2]);
        // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
         $post = new Post;
@@ -111,6 +112,7 @@ class PostsTableSeeder extends Seeder
         $post->user_id = 2;
         $post->save();
 
+        $post->tags()->sync([3,4]);
 
        // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
@@ -119,12 +121,12 @@ class PostsTableSeeder extends Seeder
         $post->url = str_slug("Mi tercer Post");
         $post->excerpt = "Extracto de mi tercer post";
         $post->body = "<p>Contenido de mi tercer post </p>";
-        $post->published_at = Carbon::now()->subDays(7);
+        $post->published_at = Carbon::now()->subDays(10);
         $post->category_id = 2;
         $post->user_id = 2;
         $post->save();
 
-        
+        $post->tags()->sync([5]);
        // $post->tags()->attach(Tag::create(['name' => 'Happy Dragons']));
 
         $post = new Post;
@@ -132,7 +134,7 @@ class PostsTableSeeder extends Seeder
         $post->url = str_slug("Mi cuarto Post");
         $post->excerpt = "Extracto de mi cuarto post";
         $post->body = "<p>Contenido de mi cuarto post </p>";
-        $post->published_at = Carbon::now()->subDays(7);
+        $post->published_at = Carbon::now()->subDays(17);
         $post->category_id = 2;
         $post->user_id = 2;
         $post->save();
