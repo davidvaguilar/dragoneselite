@@ -14,22 +14,40 @@
         <form method="POST" action="{{ route('admin.users.update', $user) }}">
           {{ csrf_field() }}
           {{ method_field('PUT') }}
-          <div class="form-group">
+          <div class="form-group col-md-6">
+            <label for="run">Run:</label>
+            <input name="run" value="{{ old('run', $user->run) }}" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
             <label for="name">Nombre:</label>
             <input name="name" value="{{ old('name', $user->name) }}" class="form-control">
           </div>
-          <div class="form-group">
+
+          <div class="form-group col-md-12">
             <label for="email">Email:</label>
             <input name="email" value="{{ old('email', $user->email) }}" class="form-control">
           </div>
 
-          <div class="form-group">
+          <div class="form-group col-md-12">
+            <label for="adress">Domicilio:</label>
+            <input name="adress" value="{{ old('adress', $user->adress) }}" class="form-control">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="phone">Telefono:</label>
+            <input name="phone" value="{{ old('phone', $user->phone) }}" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="movil">Celular:</label>
+            <input name="movil" value="{{ old('movil', $user->movil) }}" class="form-control">
+          </div>
+
+          <div class="form-group col-md-6">
             <label for="password">Contraseña:</label>
             <input name="password" type="password" placeholder="Contraseña" class="form-control">
             <span class="help-block">Dejar en blanco para no cambiar la contraseña.</span>
           </div>
-
-          <div class="form-group">
+          <div class="form-group col-md-6">
             <label for="password_confirmation">Repite la Contraseña:</label>
             <input name="password_confirmation" type="password" placeholder="Repite la contraseña" class="form-control">
           </div>

@@ -35,6 +35,11 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+            public function users()
+            {
+                return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS
+            }
+
     public function photos(){
         return $this->hasMany(Photo::class);
     }

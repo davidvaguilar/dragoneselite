@@ -27,10 +27,14 @@ class UpdateUserRequest extends FormRequest
         //dd($this->user()->id);
         //dd($this->route('user')->id);
         $rules = [
+            'run' => 'required',
             'name' => 'required',
             'email' => ['required', 
                     Rule::unique('users')->ignore($this->route('user')->id)
             ],
+            'adress' => 'nullable',
+            'phone' => 'nullable',
+            'movil' => 'nullable',
         ];
         if($this->filled('password')){
             $rules['password'] = ['confirmed', 'min:6'];

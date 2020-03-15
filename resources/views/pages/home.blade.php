@@ -1,253 +1,286 @@
-@extends('layout')
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('meta-title', config('app.name', 'Laravel') )</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('socialyte/lib/bootstrap/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('socialyte/lib/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('socialyte/lib/bootstrap-switch/css/bootstrap-switch.min.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('socialyte/style.css') }}" type="text/css">
+</head>
 
-@section('content')
-	<section class="posts container">
-	@if (isset($title))
-	<h3>{{ $title }}</h3>
-	@endif
-    @forelse($posts as $post)
-		<article class="post">
-			@include( $post->viewType('home') )
+<body id="wall">
+    <!--Header with Nav -->
+    <header class="text-right">
+        <div class="menu-icon">
+            <div class="dropdown">
+                <span class="dropdown-toggle" role="button" id="dropdownSettings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  <span class="hidden-xs hidden-sm">{{ auth()->user()->name }}</span> <i class="fa fa-cogs" aria-hidden="true"></i>
+                </span>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSettings">
+                    <li>
+                        <a href="{{ route('admin.users.show', auth()->user()) }}" title="Settings">
+                            <div class="col-xs-4">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-xs-8 text-left">
+                                <span>Perfil</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+						<a href="{{ route('logout') }}" title="Logout" 
+									onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            <div class="col-xs-4">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-xs-8 text-left">
+                                <span>Cerrar Sesión</span>
+							</div>
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--<div class="second-icon dropdown menu-icon">
+            <span class="dropdown-toggle" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				<span class="hidden-xs hidden-sm">Notifications</span>
+				<i class="fa fa-bell-o" aria-hidden="true"></i> 
+				<span class="badge">2</span>
+            </span>
+            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownNotification">
+                <li class="new-not">
+                    <a href="#" title="User name comment"><img src="{{ asset('socialyte/img/user2.jpg') }}" alt="User name" class="img-circle img-user-mini"> User comments your post</a>
+                </li>
+                <li class="new-not">
+                    <a href="#" title="User name comment"><img src="{{ asset('socialyte/img/user3.jpg') }}" alt="User name" class="img-circle img-user-mini"> User comments your post</a>
+                </li>
+                <li>
+                    <a href="#" title="User name comment"><img src="{{ asset('socialyte/img/user4.jpg') }}" alt="User name" class="img-circle img-user-mini"> User comments your post</a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" title="All notifications">All Notifications</a></li>
+            </ul>
+        </div>-->
+        <div class="second-icon menu-icon">
+            <span><a href="{{ route('pages.home') }}" title="Muro"><span class="hidden-xs hidden-sm">Muro</span> <i class="fa fa-database" aria-hidden="true"></i></a>
+            </span>
+        </div>
+    </header>
 
-			{{-- @if ($post->photos->count() === 1)				
-				@include('posts.photo')
-			@elseif ($post->photos->count() > 1)				
-				@include('posts.carousel-preview')
-			@elseif ($post->iframe)				
-				@include('posts.iframe')
-			@endif --}}
-			<div class="content-post">
+    <!--Left Sidebar with info Profile -->
+    <div class="sidebar-nav">
+        <a href="personal-profile.html" title="Profile">
+            <img src="{{ asset('socialyte/img/user.jpg') }}" alt="User name" class="img-circle img-user">
+        </a>
+        <h2 class="text-center hidden-xs"><a href="personal-profile.html" title="Profile">{{ auth()->user()->name }}</a></h2>
+        <p class="text-center user-description hidden-xs">
+            <i>Direccion: {{ auth()->user()->adress }}</i>
+        </p>
+        <p class="text-center user-description hidden-xs">
+            <i>Telefonos: {{ auth()->user()->phone }} </i>
+            <i>{{ auth()->user()->movil }}</i>
+        </p>
+    </div>
+
+    <!--Wall with Post -->
+    <div class="content-posts active" id="posts">
+        <div id="posts-container" class="container-fluid container-posts">
+		@forelse($posts as $post)
+
+
+            <div class="card-post">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="personal-profile.html" title="Profile">
+                            <img src="{{ asset('socialyte/img/user.jpg') }}" alt="User name" class="img-circle img-user">
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 info-user">
+                        <h3><a href="personal-profile.html" title="Profile">{{ $post->title }}</a></h3>
+						<p><i>{{ $post->published_at->diffForHumans() }} / {{ $post->owner->name }}</i></p><br>
+						<h3><a href="personal-profile.html" title="Profile">{{ $post->excerpt }}</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 data-post">
+						<p>{!! $post->body !!}</p>
+						
+						@include( $post->viewType() )
+                        <div class="reaction">
+                            &#x2764; 156 &#x1F603; 54
+                        </div>
+                        <div class="comments">
+                            <div class="more-comments">
+							@foreach( $post->tags as $tag)	
+								#{{ $tag->name }}
+							@endforeach
+							</div>
+							<form method="POST" action="{{ route('pages.comment.store', $post) }}">
+                                {{ csrf_field() }}
+                                <textarea name="comment" 
+                                        rows="3" 
+                                        class="form-control" 
+                                        placeholder="Enviar comentario al Autor">
+                                </textarea>
+                                <button class="btn btn-primary">Enviar</button>
+                            </form>
+                            <!--<ul>
+                                <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
+                                <li><b>User2</b> Lorem Ipsum Dolor si amet &#x1F602;</li>
+                            </ul>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Add a comment">
+                            </form>-->
+                        </div>
+                    </div>
+                </div>
+			</div>
+		@empty
+
+			<div class="card-post">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="personal-profile.html" title="Profile">
+                            <img src="{{ asset('socialyte/img/user.jpg') }}" alt="User name" class="img-circle img-user">
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 info-user">
+                        <h3><a href="personal-profile.html" title="Profile">NO HAY POST</a></h3>
+                        <p><i>2h</i></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 data-post">
+						<p>Lorem Ipsum Dolor si amet</p>
+						
+						<!--<img src="{{ asset('socialyte/img/post.jpg') }}" alt="image post" class="img-post">
+
+						<video controls>
+                          <source src="{{ asset('socialyte/img/post-video.mp4') }}" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>-->
+
+                        <div class="reaction">
+                            &#x2764; 156 &#x1F603; 54
+                        </div>
+                        <div class="comments">
+                            <div class="more-comments">View more comments</div>
+                            <ul>
+                                <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
+                                <li><b>User2</b> Lorem Ipsum Dolor si amet &#x1F602;</li>
+                            </ul>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Add a comment">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+			</div>
+
+
+		@endforelse
+
+            <!--<div class="card-post">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="user-profile.html" title="User Profile">
+                            <img src="{{ asset('socialyte/img/user2.jpg') }}" alt="User name" class="img-circle img-user">
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 info-user">
+                        <h3><a href="user-profile.html" title="User Profile">User Name</a></h3>
+                        <p><i>2h</i></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col-sm-8 col-sm-offset-2 data-post">
+                        <p>Lorem Ipsum Dolor si amet</p>
+                        <img src="{{ asset('socialyte/img/post.jpg') }}" alt="image post" class="img-post">
+                        <div class="reaction">
+                            &#x2764; 1234 &#x1F603; 54
+                        </div>
+                        <div class="comments">
+                            <div class="more-comments">View more comments</div>
+                            <ul>
+                                <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
+                                <li><b>User2</b> Lorem Ipsum Dolor si amet &#x1F602;</li>
+                            </ul>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Add a comment">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <!--<div class="card-post">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2">
+                        <a href="personal-profile.html" title="User Profile">
+                            <img src="{{ asset('socialyte/img/user.jpg') }}" alt="User name" class="img-circle img-user">
+                        </a>
+                    </div>
+                    <div class="col-xs-9 col-sm-10 info-user">
+                        <h3><a href="personal-profile.html" title="User Profile">My User</a></h3>
+                        <p><i>2h</i></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 data-post">
+                        <p>Lorem Ipsum Dolor si amet</p>
+                        Video here
+                        <video controls>
+                          <source src="{{ asset('socialyte/img/post-video.mp4') }}" type="video/mp4">
+                          Your browser does not support the video tag.
+                        </video>
+                        <div class="reaction">
+                            &#x2764; 1234 &#x1F603; 54
+                        </div>
+                        <div class="comments">
+                            <div class="more-comments">View more comments</div>
+                            <ul>
+                                <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
+                                <li><b>User2</b> Lorem Ipsum Dolor si amet &#x1F602;</li>
+                            </ul>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Add a comment">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+			</div>-->
 			
-				@include('posts.header')
 
-				<h1>{{ $post->title }}</h1>
-				<div class="divider"></div>
-				<p>{{ $post->excerpt }}</p>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="{{ route('posts.show', $post) }}" class="text-uppercase c-green">leer mas</a>
-					</div>
-					
-					@include('posts.tags')
 
-				</footer>
-			</div>
-		</article>
-	@empty
-		<article class="post">
-			<div class="content-post">
-				<h1>No hay publicaciones todavia.</h1>
-			</div>
-		</article>
-    @endforelse
-	<!--<article class="post w-image">
-			<figure><img src="img/img-post-1.png" alt="" class="img-responsive"></figure>
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 18</span>
-					</div>
-					<div class="post-category">
-						<span class="category text-capitalize">i do observe</span>
-					</div>
-				</header>
-				<h1>You know, I'd rather argue with you, then laugh with anyone else. </h1>
-				<div class="divider"></div>
-				<cite class="cite">Curabitur luctus placerat lorem id eleifend. Nulla ac lacus finibus, tempor velit hendrerit, vulputate lacus. Nunc fermentum nunc sem, ac eleifend tellus cursus nec. Donec a euismod est, vitae accumsan purus. Proin aliquet ex massa, ac finibus magna commodo vitae. </cite>
-				<p>Quisque congue lacus mattis massa luctus, nec hendrerit purus aliquet. Ut ac elementum urna. Pellentesque suscipit metus et egestas congue. Duis eu pellentesque turpis, ut maximus metus. Sed ultrices tellus vitae rutrum congue. Fusce luctus augue id nisl suscipit, vel sollicitudin orci egestas. Morbi posuere venenatis ipsum, ac vestibulum quam dignissim efficitur. Ut vitae rutrum augue, in volutpat quam. Cras a viverra ipsum. Aenean ut consequat ex, vitae vulputate nunc. Vestibulum metus nisi, aliquam sed tincidunt sit amet, pretium et augue.</p>
-				<p>Sed sagittis commodo dolor. Vivamus elementum sem sed sapien bibendum viverra. Curabitur semper scelerisque turpis eu ullamcorper. Morbi tincidunt auctor orci id consequat. Nulla odio mi, iaculis id congue quis, euismod id nisi. In varius congue diam, et viverra lorem bibendum ut.</p>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="#" class="text-uppercase c-green">read more</a>
-					</div>
-					<div class="tags container-flex">
-						<span class="tag c-gray-1 text-capitalize">#yosemite</span>
-						<span class="tag c-gray-1 text-capitalize">#peak</span>
-						<span class="tag c-gray-1 text-capitalize">#photo</span>
-					</div>
-				</footer>
-			</div>
-		</article>
+        </div>
+        <!--Close #posts-container
+        <div id="loading">
+            <img src="{{ asset('socialyte/img/load.gif') }}" alt="loader">
+        </div>-->
+    </div>
+    <!-- Close #posts -->
+    <!-- Modal container for settings
+    <div id="settingsmodal" class="modal fade text-center">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>--->
 
-		<article class="post w-gallery">
-			<div class="gallery-photos masonry">
-				<figure class="gallery-image"><img src="img/img-post-gallery-1.png" alt=""></figure>
+    <script src="{{ asset('socialyte/lib/jquery-3.2.0.min.js') }}"></script>
+    <script src="{{ asset('socialyte/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('socialyte/lib/bootstrap-switch/js/bootstrap-switch.min.js') }}"></script>
+	<!--<script src="../twemoji.maxcdn.com/twemoji.min.js"></script>-->
+	<script src="http://twemoji.maxcdn.com/twemoji.min.js"></script>
+    <script src="{{ asset('socialyte/js/lazy-load.min.js') }}"></script>
+    <script src="{{ asset('socialyte/js/socialyte.min.js') }}"></script>
+</body>
 
-				<figure class="gallery-image"><img src="img/img-post-gallery-3.png" alt=""></figure>
-
-				<figure class="gallery-image"><img src="img/img-post-gallery-2.png" alt=""></figure>
-
-				<figure class="gallery-image"><img src="img/img-post-gallery-hover.png" alt=""></figure>
-			</div>
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 14</span>
-					</div>
-					<div class="post-category">
-						<span class="category text-capitalize">i do photos</span>
-					</div>
-				</header>
-				<h1>Everything in the universe has a rhythm, everything dances.</h1>
-				<div class="divider"></div>
-				<p>Donec hendrerit magna vitae metus viverra tincidunt. Cras dolor lacus, placerat sed nulla in, egestas pharetra neque. Sed sit amet aliquet erat. Integer nec mi convallis, condimentum odio quis, pharetra tellus. Donec mollis libero in volutpat luctus. Cras laoreet pulvinar dapibus. Nulla laoreet odio at nunc semper vestibulum. Sed magna mauris, molestie eu ipsum et, pharetra egestas neque.</p>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="#" class="text-uppercase c-green">read more</a>
-					</div>
-					<div class="tags container-flex">
-						<span class="tag c-gray-1">#Yosemite</span>
-						<span class="tag c-gray-1">#Photo</span>
-						<span class="tag c-gray-1">#Hi-Res</span>
-					</div>
-				</footer>
-			</div>
-		</article>
-
-		<article class="post w-video">
-			<div class="video">
-				<iframe width="100%" height="480" src="https://www.youtube.com/embed/Zsqep7_9_mw?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-			</div>
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 14</span>
-					</div>
-					<div class="post-category">
-						<span class="category text-capitalize">i do watch</span>
-					</div>
-				</header>
-				<h1>As human beings, we have a natural compulsion to fill empty spaces.</h1>
-				<div class="divider"></div>
-				<footer class="container-flex space-between">
-					<div class="tags container-flex">
-						<span class="tag c-gray-1">#Yosemite</span>
-						<span class="tag c-gray-1">#Peak</span>
-						<span class="tag c-gray-1">#Video</span>
-					</div>
-				</footer>
-			</div>
-		</article>
-
-		<article class="post cite">
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 14</span>
-					</div>
-					<div class="post-category">
-						<span class="category text-capitalize">i do quote</span>
-					</div>
-				</header>
-				<figure class="img-cite"><img src="img/img-cite.png" alt=""></figure>
-				<h2>There is always something left to love. And if you ain’t learned that, you ain’t learned nothing.</h2>
-				<footer>
-					<div class="tags container-flex">
-						<span>— Lorraine Hansberry</span>
-					</div>
-				</footer>
-			</div>
-		</article>
-
-		<article class="post audio">
-			<div class="c-audio">
-				<iframe width="100%" height="150" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/315307209&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
-			</div>
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 14</span>
-					</div>
-					<div class="post-category">
-						<span class="category">i do listen</span>
-					</div>
-				</header>
-				<h1>Music was my refuge. I could crawl into the space between the notes and curl my back to loneliness.</h1>
-				<div class="divider"></div>
-				<p>Donec hendrerit magna vitae metus viverra tincidunt. Cras dolor lacus, placerat sed nulla in, egestas pharetra neque. Sed sit amet aliquet erat. Integer nec mi convallis, condimentum odio quis, pharetra tellus. Donec mollis libero in volutpat luctus. Cras laoreet pulvinar dapibus. Nulla laoreet odio at nunc semper vestibulum. Sed magna mauris, molestie eu ipsum et, pharetra egestas neque.</p>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="#" class="text-uppercase c-green">read more</a>
-					</div>
-					<div class="tags container-flex">
-						<span class="tag c-gray-1">#Weekend</span>
-						<span class="tag c-gray-1">#Music</span>
-						<span class="tag c-gray-1">#Discovery</span>
-					</div>
-				</footer>
-			</div>
-		</article>
-
-		<article class="post w-slider">
-			<figure><img src="img/img-slider-1.png" alt="" class="img-responsive"></figure>
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 12</span>
-					</div>
-					<div class="post-category">
-						<span class="category text-capitalize">i do explore</span>
-					</div>
-				</header>
-				<h1>Nature and Books belong to the eyes that see them. </h1>
-				<div class="divider"></div>
-				<cite class="cite">Nunc a enim interdum lectus accumsan sagittis. Ut mauris diam, efficitur vitae malesuada ut, tempus et mi. Sed eget leo vehicula, dapibus arcu id, viverra erat. Proin auctor non nulla sed mollis.</cite>
-				<p>Nulla elit leo, tincidunt eu lacus ut, suscipit gravida tortor. Praesent feugiat, neque non pellentesque, velit sem hendrerit arcu, eu viverra ligula eu tortor. Suspendisse et cursus enim. Curabitur condimentum, sem quis pharetra hendrerit, leo odio rhoncus felis, sed posuere augue diam feugiat enim. Donec gravida non metus eu pretium. Ut sed sodales dolor, non vehicula enim. Nam fringilla blandit sem, eget vestibulum arcu porta sed. Mauris sit amet nulla id ante semper luctus id a enim.</p>
-				<p>Sed ac venenatis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut ut congue nulla. Aenean elementum gravida convallis. Integer ac neque nisi. Sed ac magna in risus convallis laoreet. Pellentesque in orci ante.</p>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="#" class="text-uppercase c-green">read more</a>
-					</div>
-					<div class="tags container-flex">
-						<span class="tag c-gray-1 text-capitalize">#Idea</span>
-						<span class="tag c-gray-1 text-capitalize">#Yosemite</span>
-						<span class="tag c-gray-1 text-capitalize">#Vacation</span>
-					</div>
-				</footer>
-			</div>
-		</article>-->
-
-<!--		<article class="post image-w-text">
-			<div class="content-post">
-				<header class="container-flex space-between">
-					<div class="date">
-						<span class="c-gray-1">sep 11</span>
-					</div>
-					<div class="post-category">
-						<span class="category">i do reflect</span>
-					</div>
-				</header>
-				<h1>Democracy means simply the bludgeoning of the people by the people for the people.</h1>
-				<div class="divider"></div>
-				<div class="image-w-text-content">
-					<figure class="block-left"><img src="img/img-post-2.png" alt=""></figure>
-					<p>Quisque congue lacus mattis massa luctus, nec hendrerit purus aliquet. Ut ac elementum urna. Pellentesque suscipit metus et egestas congue. Duis eu pellentesque turpis, ut maximus metus. Sed ultrices tellus vitae rutrum congue. Fusce luctus augue id nisl suscipit, vel sollicitudin orci egestas. Morbi posuere venenatis ipsum, ac vestibulum quam dignissim efficitur. Ut vitae rutrum augue, in volutpat quam. Cras a viverra ipsum. Aenean ut consequat ex, vitae vulputate nunc. Vestibulum metus nisi, aliquam sed tincidunt sit amet, pretium et augue.</p>
-					<p>Mauris sem odio, rhoncus eget euismod sed, pellentesque sit amet felis. Praesent dictum eleifend dui et efficitur. Nunc non orci in neque sodales semper. Etiam euismod volutpat lorem, vestibulum malesuada justo aliquet eget. Nunc lacus ante, varius a euismod eu, finibus commodo erat. Curabitur tincidunt sit amet nunc id interdum. Aliquam augue nisi, venenatis vitae ex at, lobortis fringilla nibh. Proin placerat enim vitae egestas eleifend. Aliquam</p>
-					<p>quis orci dignissim, posuere nibh a, eleifend augue. Cras quis metus nec tortor aliquet ullamcorper. Quisque varius porta metus, ut maximus dolor euismod nec. Suspendisse sit amet feugiat turpis.</p>
-					<cite class="cite-2">Curabitur ut leo pulvinar, consectetur magna eu, feugiat purus. Morbi hendrerit lectus turpis, a porttitor velit imperdiet id.</cite>
-					<p>Nunc placerat dolor at lectus hendrerit dignissim. Ut tortor sem, consectetur nec hendrerit ut, ullamcorper ac odio. Donec viverra ligula at quam tincidunt imperdiet. Nulla mattis tincidunt auctor. Nullam scelerisque ante mauris, egestas commodo nisi gravida ultrices. Suspendisse dapibus feugiat tincidunt. Aliquam gravida quam at ipsum sagittis bibendum. </p>
-				</div>
-				<footer class="container-flex space-between">
-					<div class="read-more">
-						<a href="#" class="text-uppercase c-green">read more</a>
-					</div>
-					<div class="tags container-flex">
-						<span class="tag c-gray-1">#Democracy</span>
-						<span class="tag c-gray-1">#Introspection</span>
-					</div>
-				</footer>
-			</div>
-		</article>-->
-
-    </section>
-    
-    <!-- fin del div.posts.container -->
-	{{ $posts->appends(request()->all())->links() }}
-	<!--<div class="pagination">
-		<ul class="list-unstyled container-flex space-center">
-			<li><a href="#" class="pagination-active">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-		</ul>
-	</div>-->
-@stop
+</html>

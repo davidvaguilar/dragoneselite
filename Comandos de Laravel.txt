@@ -9,3 +9,11 @@ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvid
 
 
 composer require barryvdh/laravel-debugbar --dev INSTALAR BARRA PARA MONITOR DESARROLLO
+
+
+tabla intermedia
+
+php artisan make:migration create_tag_user_table --create=tag_user
+
+
+php artisan make:mail NewComment

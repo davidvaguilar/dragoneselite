@@ -16,6 +16,11 @@ class Tag extends Model
         return $this->belongsToMany(Post::class);
     }
 
+                public function users()
+                {
+                    return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS  belongsToMany  hasMany
+                }
+
     public function setNameAttribute($name){    //MUTADOR
         $this->attributes['name'] = $name;
         $this->attributes['url'] = str_slug($name);

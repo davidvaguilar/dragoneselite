@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'run', 'name', 'email', 'password', 'adress', 'phone', 'movil'
     ];
 
     /**
@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);    //, 'user_id'
     }
 
+                public function tags()
+                {
+                    return $this->hasMany(Tag::class);    // PERTENECE A MUCHOS
+                }
+
 
     public function scopeAllowed($query)
     {
@@ -50,4 +55,5 @@ class User extends Authenticatable
     {
         return $this->roles->pluck('display_name')->implode(', ');
     }
+    
 }

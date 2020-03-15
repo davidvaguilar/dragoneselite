@@ -50,8 +50,12 @@ class UsersController extends Controller
     {
         $this->authorize('create', new User);
         $data = $request->validate([
-            'name' => 'required|max:255',
+            'run' => 'required|max:15',
+            'name' => 'required|max:50',
             'email' => 'required|email|max:255|unique:users',
+            'adress' => 'nullable',
+            'phone' => 'nullable',
+            'movil' => 'nullable'
         ]);
         $data['password'] = str_random(8);
 
@@ -119,7 +123,9 @@ class UsersController extends Controller
         }*/
 
         //$data = $request->validate($rules);
+        //dd($request->all());
         $data = $request->validated();
+        //dd($data);
         $user->update($data);
         return redirect()->route('admin.users.edit', $user)->withFlash('Usuario actualizado');
     }

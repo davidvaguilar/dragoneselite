@@ -178,7 +178,7 @@
         //CKEDITOR.config.height = 315;
         //Initialize Select2 Elements
         $('.select2').select2({
-            tags: true
+           // tags: false
         });
 
         var myDropzone = new Dropzone('.dropzone', {
