@@ -79,7 +79,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="content-cell" align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
-                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #AEAEAE; font-size: 12px; text-align: center;"><a href="www.dyi.cl"> © 2020 dyi. All rights reserved.</a></p>
+                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #AEAEAE; font-size: 12px; text-align: center;"><a href="{{ url('http://www.dyi.cl') }}"> © 2020 dyi. All rights reserved.</a></p>
                                                 </td>
                                             </tr>
                                         </tbody>

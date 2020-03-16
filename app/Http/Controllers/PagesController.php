@@ -53,7 +53,8 @@ class PagesController extends Controller
     public function comment(Post $post, Request $request){
        // dd($request->comment);
         Mail::to('david.villegas.aguilar@gmail.com')->send(new NewComment($post, $request->comment));
-        return redirect('pages.home');
+        //return redirect('pages.home');
+        return back();
     }
 
     public function about(){

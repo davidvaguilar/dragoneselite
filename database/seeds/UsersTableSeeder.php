@@ -85,31 +85,23 @@ class UsersTableSeeder extends Seeder
         $admin->run = '15979446-6';
         $admin->name = 'David Villegas Aguilar';
         $admin->email = 'david.villegas.aguilar@gmail.com';
-        $admin->adress = 'algun momento';
+        $admin->adress = 'Heroes de la concepcion - Iquique';
+        $admin->phone = '+56976400180';
         $admin->password = '123123';
         $admin->save();
 
         $admin->assignRole($adminRole);
 
-        $writer = new User;        
-        $writer->run = '11111111-1';
-        $writer->name = 'juan';
-        $writer->email = 'prueba1@correo.cl';
-        $writer->password = '123123';
-        $writer->save();
+        $user = new User;        
+        $user->run = '11111111-1';
+        $user->name = 'juan perez';
+        $user->email = 'prueba@correo.cl';
+        $user->password = '123123';
+        $user->adress = 'Iquique';        
+        $user->phone = '+56955555555';
+        $user->movil = '572555555';
+        $user->password = '123123';
+        $user->save();
 
-        $writer = new User;
-        $writer->name = 'pedro';
-        $writer->run = '22222222-3';
-        $writer->email = 'prueba2@correo.cl';
-        $writer->password = '123123';
-        $writer->save();
-
-        $writer = new User;
-        $writer->run = '33333333-3';
-        $writer->name = 'luis';
-        $writer->email = 'prueba3@correo.cl';
-        $writer->password = '123123';
-        $writer->save();
     }
 }

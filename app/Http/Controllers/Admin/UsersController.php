@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Tag;
 use Mail;
 use App\Mail\LoginCredentials;
 use Illuminate\Http\Request;
@@ -35,9 +36,10 @@ class UsersController extends Controller
     public function create()
     {
         $user = new User;
+        $tags = Tag::all();
         $roles = Role::with('permissions')->get();
         $permissions = Permission::pluck('name','id');
-        return view('admin.users.create', compact('user', 'roles', 'permissions'));
+        return view('admin.users.create', compact('user', 'roles', 'permissions', 'tags'));
     }
 
     /**
@@ -50,7 +52,7 @@ class UsersController extends Controller
     {
         $this->authorize('create', new User);
         $data = $request->validate([
-            'run' => 'required|max:15',
+            'run' => 'required|max:15|unique:users',
             'name' => 'required|max:50',
             'email' => 'required|email|max:255|unique:users',
             'adress' => 'nullable',
@@ -60,6 +62,8 @@ class UsersController extends Controller
         $data['password'] = str_random(8);
 
         $user = User::create($data);
+
+        $user->syncTags($request->get('tags'));
 
         if ($request->filled('roles')){
             $user->assignRole($request->roles);
@@ -99,8 +103,10 @@ class UsersController extends Controller
         $this->authorize('update', $user);
         //$roles = Role::pluck('name','id');
         $roles = Role::with('permissions')->get();
+        $tags = Tag::all();
+        //dd($user->tags->pluck('id'));
         $permissions = Permission::pluck('name','id');
-        return view('admin.users.edit', compact('user', 'roles', 'permissions'));
+        return view('admin.users.edit', compact('user', 'roles', 'permissions', 'tags'));
     }
 
     /**
@@ -127,6 +133,7 @@ class UsersController extends Controller
         $data = $request->validated();
         //dd($data);
         $user->update($data);
+        $user->syncTags($request->get('tags'));
         return redirect()->route('admin.users.edit', $user)->withFlash('Usuario actualizado');
     }
 

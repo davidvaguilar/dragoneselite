@@ -103,9 +103,9 @@
                         <!-- /.input group -->
                     </div>
                     <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
-                        <label>Categoria:</label>
+                        <label>Tipo :</label>
                         <select name="category_id" class="form-control select2">
-                            <option value="">Selecciona una Categoria</option>
+                            <option value="">Selecciona una tipo</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"                              
                                     {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }} 
@@ -115,7 +115,7 @@
                         {!! $errors->first('category_id', '<span class="help-block">:message</span>' ) !!}                        
                     </div>
                     <div class="form-group {{ $errors->has('tags') ? 'has-error' : '' }}">
-                        <label>Etiquetas:</label>  <!--var_dump(old('tags'))-->
+                        <label>Categorias :</label>  <!--var_dump(old('tags'))-->
                         <select name="tags[]" class="form-control select2" 
                                 multiple="multiple" 
                                 data-placeholder="Seleccione una o mas etiquetas" 

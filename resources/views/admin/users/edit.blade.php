@@ -52,6 +52,21 @@
             <input name="password_confirmation" type="password" placeholder="Repite la contraseña" class="form-control">
           </div>
 
+          <div class="form-group col-md-12 {{ $errors->has('tags') ? 'has-error' : '' }}">
+              <label>Categorias :</label>  <!--var_dump(old('tags'))-->
+              <select name="tags[]" class="form-control select2" 
+                      multiple="multiple" 
+                      data-placeholder="Seleccione una o mas etiquetas" 
+                      style="width: 100%;">
+                  @foreach ($tags as $tag)
+                      <option {{ collect(old('tags', $user->tags->pluck('id') ))->contains($tag->id) ? 'selected' : '' }} 
+                              value="{{ $tag->id }}"
+                          >{{ $tag->name }}</option>
+                  @endforeach
+              </select>                        
+              {!! $errors->first('tags', '<span class="help-block">:message</span>' ) !!}  
+          </div>
+
           <button class="btn btn-primary btn-block">Actualizar usuario</button>
         </form>
       </div>
@@ -111,5 +126,24 @@
     </div>
   </div>
 </div>
-   
 @endsection
+
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.0/dropzone.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
+@endpush
+
+@push('scripts')
+    <!-- Select2 -->
+    <script src="{{ asset('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+
+    <script>
+        $('.select2').select2({
+           // tags: false
+        });
+
+    </script>
+@endpush

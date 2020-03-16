@@ -94,6 +94,9 @@
         <div id="posts-container" class="container-fluid container-posts">
 		@forelse($posts as $post)
 
+            @foreach( $post->tags as $tag )
+                @foreach( $tag->users as $user )
+                    @if( $user->id ==  auth()->id() )
 
             <div class="card-post">
                 <div class="row">
@@ -113,9 +116,9 @@
 						<p>{!! $post->body !!}</p>
 						
 						@include( $post->viewType() )
-                        <div class="reaction">
+                        <!--<div class="reaction">
                             &#x2764; 156 &#x1F603; 54
-                        </div>
+                        </div>-->
                         <div class="comments">
                             <div class="more-comments">
 							@foreach( $post->tags as $tag)	
@@ -124,12 +127,15 @@
 							</div>
 							<form method="POST" action="{{ route('pages.comment.store', $post) }}">
                                 {{ csrf_field() }}
+                                <div class="form-group col-md-10">
                                 <textarea name="comment" 
-                                        rows="3" 
+                                        rows="3"
                                         class="form-control" 
-                                        placeholder="Enviar comentario al Autor">
-                                </textarea>
-                                <button class="btn btn-primary">Enviar</button>
+                                        placeholder="Enviar comentario al autor"></textarea>
+                                </div>
+                                <div class="form-group col-md-2">
+                                <button class="btn btn-primary btn-block">Enviar</button>
+                                </div>
                             </form>
                             <!--<ul>
                                 <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
@@ -142,6 +148,11 @@
                     </div>
                 </div>
 			</div>
+
+                    @endif
+			    @endforeach
+		    @endforeach
+
 		@empty
 
 			<div class="card-post">

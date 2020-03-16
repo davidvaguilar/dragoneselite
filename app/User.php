@@ -39,7 +39,7 @@ class User extends Authenticatable
 
                 public function tags()
                 {
-                    return $this->hasMany(Tag::class);    // PERTENECE A MUCHOS
+                    return $this->belongsToMany(Tag::class);    // PERTENECE A MUCHOS  belongsToMany es una coleccion
                 }
 
 
@@ -54,6 +54,16 @@ class User extends Authenticatable
     public function getRoleDisplayName()
     {
         return $this->roles->pluck('display_name')->implode(', ');
+    }
+
+    public function syncTags($tags){
+        $tagIds = collect($tags)->map(function($tag){
+            return Tag::find($tag)
+            ? $tag
+            : Tag::create(['name' => $tag])->id;
+        });
+
+        return $this->tags()->sync($tagIds);
     }
     
 }
