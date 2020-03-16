@@ -27,8 +27,12 @@
                 <thead>
                     <tr>
                         <th>Id</th>
+                        <th>Run</th>
                         <th>Nombre</th>
+                        <th>Categoria</th>
                         <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Celular</th>
                         <th>Roles</th>
                         <th>Acciones</th>
                     </tr>
@@ -37,20 +41,28 @@
                     @foreach($users as $user)
                         <tr> 
                             <td>{{ $user->id }}</td>
+                            <td>{{ $user->run }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>                            
+                            <td>
+                                @foreach( $user->tags as $tag)	
+								    #{{ $tag->name }}
+							    @endforeach
+                            </td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone }}</td>
+                            <td><a href="https://api.whatsapp.com/send?phone=56{{ $user->movil }}" target="_blank">{{ $user->movil }}</a></td>       
                             <td>{{ $user->getRoleNames()->implode(', ') }}</td>
                             <td>
                             @can('view', $user)
                                 <a href="{{ route('admin.users.show', $user) }}" 
                                     class="btn btn-xs btn-default">
-                                    <i class="fa fa-eye"></i>
+                                        <i class="fa fa-eye"></i>
                                 </a>
                             @endcan
                             @can('update', $user)
                                 <a href="{{ route('admin.users.edit', $user) }}" 
                                     class="btn btn-xs btn-info">
-                                    <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-pencil"></i>
                                 </a>
                             @endcan
                             @can('delete', $user)
@@ -61,8 +73,9 @@
                                     {{ method_field('DELETE') }}
                                     <button type="submit" 
                                         onclick="return confirm('¿Estas seguro de querer eliminar este usuario?')"
-                                        class="btn btn-xs btn-danger"
-                                    ><i class="fa fa-times"></i></button>
+                                        class="btn btn-xs btn-danger">
+                                            <i class="fa fa-times"></i>
+                                    </button>
                                 </form>
                             @endcan
                             </td>
@@ -89,14 +102,45 @@
     <script>
         $(function () {
             $('#posts-table').DataTable({
-            'paging'      : true,
-            'lengthChange': false,
-            'searching'   : false,
-            'ordering'    : true,
-            'info'        : true,
-            'autoWidth'   : false
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : false,
+                'ordering'    : true,
+                'info'        : true,
+                'autoWidth'   : false,
+                "language": {
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    },
+                    "buttons": {
+                        "copy": "Copiar",
+                        "colvis": "Visibilidad"
+                    }
+                }
             })
+
         })
+
+       
     </script>
 
 @endpush

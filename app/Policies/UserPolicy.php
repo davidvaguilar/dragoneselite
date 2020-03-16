@@ -11,7 +11,7 @@ class UserPolicy
 
     public function before($user)
     {
-        if ( $user->hasRole('Admin') ){
+        if ( $user->hasRole('Admin') || $user->hasRole('Writer')  ){
             return true;
         }
     }
@@ -25,6 +25,7 @@ class UserPolicy
      */
     public function view(User $authUser, User $user)
     {
+        //dd($user->hasPermissionTo('View users'));
         return $authUser->id === $user->id
             || $user->hasPermissionTo('View users');
     }

@@ -8,7 +8,7 @@
             <i class="fa fa-home"></i> <span>Inicio</span>
         </a>
     </li>
-   
+    @can('view', new App\Post)
     <li class="treeview {{ setActiveRoute('admin.posts.index') }}">
         <a href="#"><i class="fa fa-bars"></i> <span>Blog</span>
         <span class="pull-right-container">
@@ -16,14 +16,12 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            @can('view', new App\Post)
             <li class="{{ setActiveRoute('admin.posts.index') }}">
                 <a href="{{ route('admin.posts.index') }}">
                     <i class="fa fa-eye"> Ver todos los posts</i>
                 </a>
             </li>
-            @endcan
-            @can('view', new App\Post)
+            @can('create', new App\Post)
                 <li>
                     @if (request()->is('admin/posts/*'))
                         <a href="{{ route('admin.posts.index', '#create') }}"><i class="fa fa-pencil"> Crear un post</i></a>
@@ -34,6 +32,7 @@
             @endcan
         </ul>   
     </li>
+    @endcan
     @can('view', new App\User)
     <li class="treeview {{ setActiveRoute(['admin.users.index', 'admin.users.create']) }}">
         <a href="#"><i class="fa fa-users"></i> <span>Usuarios</span>

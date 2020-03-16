@@ -29,7 +29,7 @@
                                             <tr>
                                                 <td class="content-cell" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
                                                     <h1 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #2F3133; font-size: 19px; font-weight: bold; margin-top: 0; text-align: left;">Hola Administrador: </h1>
-                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787E; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Tienes una publicación.</p>
+                                                    <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787E; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Tienes un nuevo comentario a la siguiente publicación.</p>
                                                     <div class="table" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                                                         <table style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 30px auto; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;">
                                                             <thead style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
@@ -49,7 +49,7 @@
                                                                                         <img src="https://ci5.googleusercontent.com/proxy/jm-gHIro1SPZ63mStJTHDIhSzC3L4RGBm3Sam3MEuOWi9eY9u7kBJTR72OusPcZSBxDas-oPM7I0aQqaxPn2L6roV2ZwB0YW=s0-d-e1-ft#https://i.udemycdn.com/user/50x50/25912828_6bb3_5.jpg" alt="" height="50" width="50" border="0" style="border-radius:50%;display:block" class="CToWUd">
                                                                                     </td>
                                                                                     <td valign="middle" align="left" style="vertical-align:middle;padding-left:10px">
-                                                                                        <strong>{{ auth()->user()->name }}</strong>
+                                                                                        <strong>{{ auth()->user()->name }}</strong> dice,
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -74,8 +74,13 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                                                                                    <a href="mailto:{{ auth()->user()->email }}" style="font-size:16px;color:#ffffff;text-decoration:none;border-radius:2px;background-color:#ec5252;border-top:12px solid #ec5252;border-bottom:12px solid #ec5252;border-right:18px solid #ec5252;border-left:18px solid #ec5252;display:inline-block" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://e2.udemymail.com/ls/click?upn%3DgSJWFDkXNxH42QchhbJ2xqOADNuhnfv42okA-2BoZszQf0mOIcL0D2jb0i4GFexojPdMh0NhoDPyVjZRHnrT21JI-2Fa-2FThoqjYKkDYhUjbNTtK-2BG7LLqxhg92BJwSruRsi5RjxBme47EJxLltvvj8NlwtsHxApsGwlBqUV1DFjzi4LyQntuhsnQ-2FWOWEMNWbp-2Fh2qIUdlQNi-2BwkJF0OdfZVAbXi5ne1fdtFlLex3oDdeRqFzZHinPajB4MCcq75DTpL2pNAbuYlj5ZXmRGKqmlYMQ-3D-3DZVOD_YxCxpoge33FNHhRVcK23dwLqLOeynHi8qQ0tx8RJws23opedVLTlgBYFG-2FU6p0MX5pA2PgJAtBiYjMVpRDKwGvltZNwAvPVCC1Kt2WQ95DT7GlNcNaZBaywp-2BrCIxrjzstUkW7pZPbzREkzk-2B3HoloQ5jjYvBE-2BxZdQOV2Ljz0sYVgzanVy1iLSE-2FxYyetdvMUcBtM66SEB3JX9nWbQOnYKY3Bj2ijGW8ROyVcLmFppq-2BFLlSko6L6Q1hVWeWwFVN0HI9bCbwbNGtwdmJHizjmzXTH8fNTFt14hzqL5QNKRQPo2mgFeop7VHMJuQKr8hUgqNgnk-2FXSi3hYHEJ7vFdx6CbLBSq6aOeAeOEW2WR1c-3D&amp;&amp;&amp;">
-                                                                                                        Responder al mensaje
+                                                                                                    <a href="mailto:{{ auth()->user()->email }}" style="font-size:16px;color:#ffffff;text-decoration:none;border-radius:2px;background-color:#007bff;border-top:12px solid #007bff;border-bottom:12px solid #007bff;border-right:18px solid #007bff;border-left:18px solid #007bff;display:inline-block" target="_blank">
+                                                                                                        Responder por correo
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                                <td style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
+                                                                                                    <a href="https://api.whatsapp.com/send?phone=56{{ auth()->user()->movil }}" style="font-size:16px;color:#ffffff;text-decoration:none;border-radius:2px;background-color:#28a745;border-top:12px solid #28a745;border-bottom:12px solid #28a745;border-right:18px solid #28a745;border-left:18px solid #28a745;display:inline-block" target="_blank">
+                                                                                                        Responder por whatapp
                                                                                                     </a>
                                                                                                 </td>
                                                                                             </tr>
