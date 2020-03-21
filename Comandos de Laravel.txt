@@ -17,3 +17,18 @@ php artisan make:migration create_tag_user_table --create=tag_user
 
 
 php artisan make:mail NewComment
+
+
+/* CAMBIAR CONTRASEÑA  */
+
+ protected function resetPassword($user, $password)
+    {
+        $user->password = $password;     //Hash::make($password);  //anterior
+
+public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
