@@ -9,7 +9,7 @@ class PostsController extends Controller
 {
     public function show(Post $post){
         //$post = Post::find($id);
-
+//dd(auth()->check());
         if ($post->isPublished() || auth()->check()){
             return view('posts.show', compact('post'));
         }

@@ -16,7 +16,7 @@
           {{ method_field('PUT') }}
           <div class="form-group col-md-6">
             <label for="run">Run:</label>
-            <input name="run" value="{{ old('run', $user->run) }}" class="form-control">
+            <input name="run" value="{{ $user->run }}" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="name">Nombre:</label>
@@ -25,7 +25,7 @@
 
           <div class="form-group col-md-12">
             <label for="email">Email:</label>
-            <input name="email" value="{{ old('email', $user->email) }}" class="form-control">
+            <input name="email" value="{{ $user->email }}" class="form-control">
           </div>
 
           <div class="form-group col-md-12">

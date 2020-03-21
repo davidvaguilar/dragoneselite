@@ -253,12 +253,13 @@ desired effect
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
+  <!-- Default to the left -->
+    <strong>Copyright &copy; 2020 <a href="{{ url('http://www.dyi.cl') }}">DYI</a>.</strong> Todos los derechos reservados.
+ 
+    <!-- To the right 
     <div class="pull-right hidden-xs">
       Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    </div>-->
   </footer>
 
   <!-- Control Sidebar -->
@@ -345,7 +346,6 @@ desired effect
 <script src="{{ asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
 @unless(request()->is('admin/posts/*'))
     @include('admin.posts.create')
 @endunless
@@ -353,10 +353,6 @@ desired effect
 @stack('scripts')
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/js/adminlte.min.js') }}"></script>
-
-
-
-
 
 </body>
 </html>

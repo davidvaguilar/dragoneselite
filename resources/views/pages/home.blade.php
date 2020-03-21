@@ -94,11 +94,6 @@
         <div id="posts-container" class="container-fluid container-posts">
 		@forelse($posts as $post)
 
-
-           {{-- @foreach( $post->tags as $tag )
-                @foreach( $tag->users as $user )
-                    @if( $user->id == auth()->id() )   --}}
-
             <div class="card-post">
                 <div class="row">
                     <div class="col-xs-3 col-sm-2">
@@ -117,9 +112,19 @@
 						<p>{!! $post->body !!}</p>
 						
 						@include( $post->viewType() )
-                        <!--<div class="reaction">
-                            &#x2764; 156 &#x1F603; 54
-                        </div>-->
+                        
+                        <div class="reaction">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request()->fullUrl() }}&title={{ $post->title }}"
+                                    class="btn btn-xs btn-primary"
+                                    title="Compartir en Facebook"
+                                    target="_blank"
+                                ><i class="fa fa-fw fa-facebook-official"></i></a>
+                            <a href="https://twitter.com/intent/tweet?url={{ request()->fullUrl() }}&text={{ $post->title }}&via={{ config('app.name') }}&hashtags=dragones" 
+                                    class="btn btn-xs btn-info"
+                                    target="_blank" 
+                                    title="Tweet"
+                                ><i class="fa fa-fw fa-twitter-square"></i></a>
+                        </div>
                         <div class="comments">
                             <div class="more-comments">
 							@foreach( $post->tags as $tag)	
@@ -128,14 +133,14 @@
 							</div>
 							<form method="POST" action="{{ route('pages.comment.store', $post) }}">
                                 {{ csrf_field() }}
-                                <div class="form-group col-md-10">
-                                <textarea name="comment" 
-                                        rows="3"
-                                        class="form-control" 
-                                        placeholder="Enviar comentario al autor"></textarea>
+                                <div class="form-group col-md-9">
+                                    <textarea name="comment" 
+                                            rows="3"
+                                            class="form-control" 
+                                            placeholder="Enviar comentario al autor"></textarea>
                                 </div>
-                                <div class="form-group col-md-2">
-                                <button class="btn btn-primary btn-block">Enviar</button>
+                                <div class="form-group col-md-3">
+                                    <button class="btn btn-primary btn-block">Enviar</button>
                                 </div>
                             </form>
                             <!--<ul>
@@ -150,12 +155,7 @@
                 </div>
 			</div>
 
-            {{--        @endif
-			    @endforeach
-		    @endforeach   --}}
-
 		@empty
-
 			<div class="card-post">
                 <div class="row">
                     <div class="col-xs-3 col-sm-2">
@@ -164,39 +164,10 @@
                         </a>
                     </div>
                     <div class="col-xs-9 col-sm-10 info-user">
-                        <h3><a href="personal-profile.html" title="Profile">NO HAY POST</a></h3>
-                        <p><i>2h</i></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8 col-sm-offset-2 data-post">
-						<p>Lorem Ipsum Dolor si amet</p>
-						
-						<!--<img src="{{ asset('socialyte/img/post.jpg') }}" alt="image post" class="img-post">
-
-						<video controls>
-                          <source src="{{ asset('socialyte/img/post-video.mp4') }}" type="video/mp4">
-                          Your browser does not support the video tag.
-                        </video>-->
-
-                        <div class="reaction">
-                            &#x2764; 156 &#x1F603; 54
-                        </div>
-                        <div class="comments">
-                            <div class="more-comments">View more comments</div>
-                            <ul>
-                                <li><b>User1</b> Lorem Ipsum Dolor si amet</li>
-                                <li><b>User2</b> Lorem Ipsum Dolor si amet &#x1F602;</li>
-                            </ul>
-                            <form>
-                                <input type="text" class="form-control" placeholder="Add a comment">
-                            </form>
-                        </div>
+                        <h3><a href="personal-profile.html" title="Profile">NO HAY PUBLICACIONES AUN</a></h3>
                     </div>
                 </div>
 			</div>
-
-
 		@endforelse
 
             <!--<div class="card-post">

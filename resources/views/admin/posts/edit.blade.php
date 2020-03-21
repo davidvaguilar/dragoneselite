@@ -75,8 +75,8 @@
                             name="iframe"
                             rows="4" 
                             class="form-control" 
-                            placeholder="Ingresa el contenido de audio y video">
-                            {{ old('iframe', $post->iframe) }}</textarea>
+                            placeholder="Ingresa el contenido de audio y video"
+                            >{{ old('iframe', $post->iframe) }}</textarea>
                         {!! $errors->first('iframe', '<span class="help-block">:message</span>' ) !!}                     
                     </div>
                     
@@ -123,7 +123,7 @@
                             @foreach ($tags as $tag)
                                 <option {{ collect(old('tags', $post->tags->pluck('id') ))->contains($tag->id) ? 'selected' : '' }} 
                                         value="{{ $tag->id }}"
-                                    >{{ $tag->name }}</option>
+                                        >{{ $tag->name }}</option>
                             @endforeach
                         </select>                        
                         {!! $errors->first('tags', '<span class="help-block">:message</span>' ) !!}  
@@ -139,7 +139,7 @@
                         <div class="dropzone"></div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Guardar Publicacion</button>
+                        <button type="submit" class="btn btn-primary btn-block">Guardar Publicación</button>
                     </div>
                 </div>
             </div>

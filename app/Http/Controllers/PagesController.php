@@ -36,7 +36,8 @@ class PagesController extends Controller
         if(request('year')){
             $query->whereYear('published_at', request('year'));
         }
-        $posts = $query;
+        $posts = $query->where('published_at', '!=', null)->where('published_at', '<=', today());
+       // dd($posts);
         //$posts = Post::published()->paginate();
         //$posts = Post::published()->simplePaginate(1);  //ANTERIOR y siguiente
         return view('pages.home', compact('posts')); 

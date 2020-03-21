@@ -7,13 +7,13 @@
 <article class="post container">
 
     @include( $post->viewType() )
-    {{-- @if ($post->photos->count() === 1)
-      @include('posts.photo')
-    @elseif ($post->photos->count() > 1)
-      @include('posts.carousel')
-    @elseif ($post->iframe)
-      @include('posts.iframe')
-    @endif --}}
+            {{-- @if ($post->photos->count() === 1)
+              @include('posts.photo')
+            @elseif ($post->photos->count() > 1)
+              @include('posts.carousel')
+            @elseif ($post->iframe)
+              @include('posts.iframe')
+            @endif --}}
 
     <div class="content-post">
       @include('posts.header')	

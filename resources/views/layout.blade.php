@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>@yield('meta-title', config('app.name', 'Laravel') )</title>
-	<meta name="description" content="@yield('meta-description', 'Este es el blog de Zendero')">
+	<meta name="description" content="@yield('meta-description', 'Este es el blog de dyi')">
 	<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/framework.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -18,7 +18,7 @@
 	<div class="preload"></div>
 	<header class="space-inter">
 		<div class="container container-flex space-between">
-			<figure class="logo"><img src="{{ asset('img/logo.png') }}" alt=""></figure>
+			<figure class="logo"><img src="" alt=""></figure>  <!-- {{ asset('img/logo.png') }}-->
 			
 			@include('partials.nav')
 
@@ -33,7 +33,7 @@
 	<section class="footer">
 		<footer>
 			<div class="container">
-				<figure class="logo"><img src="{{ asset('img/logo.png') }}" alt=""></figure>
+				<figure class="logo"><img src="" alt=""></figure>   <!-- {{ asset('img/logo.png') }}-->
 				<nav>
 					<ul class="container-flex space-center list-unstyled">
 						<li><a href="index.html" class="text-uppercase c-white">home</a></li>
@@ -45,7 +45,7 @@
 				<div class="divider-2"></div>
 				<p>Nunc placerat dolor at lectus hendrerit dignissim. Ut tortor sem, consectetur nec hendrerit ut, ullamcorper ac odio. Donec viverra ligula at quam tincidunt imperdiet. Nulla mattis tincidunt auctor.</p>
 				<div class="divider-2" style="width: 80%;"></div>
-				<p>© 2017 - Zendero. All Rights Reserved. Designed & Developed by <span class="c-white">Agencia De La Web</span></p>
+				<p>© 2020 - dyi. All Rights Reserved. Designed & Developed by <span class="c-white">Agencia De La Web</span></p>
 				<ul class="social-media-footer list-unstyled">
 					<li><a href="#" class="fb"></a></li>
 					<li><a href="#" class="tw"></a></li>

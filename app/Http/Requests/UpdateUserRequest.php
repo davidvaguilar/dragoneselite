@@ -27,7 +27,9 @@ class UpdateUserRequest extends FormRequest
         //dd($this->user()->id);
         //dd($this->route('user')->id);
         $rules = [
-            'run' => 'required',
+            'run' => ['required', 
+                    Rule::unique('users')->ignore($this->route('user')->id)
+            ],
             'name' => 'required',
             'email' => ['required', 
                     Rule::unique('users')->ignore($this->route('user')->id)

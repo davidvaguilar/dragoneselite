@@ -39,7 +39,13 @@
                   <strong>{{ $post->title }}</strong>
               </a>
               <br>
-              <small class="text-muted">Publicado el {{ $post->published_at->format('d/m/Y') }} </small>
+              <small class="text-muted">
+                  @if ($post->published_at)
+                      Publicado el {{ $post->published_at->format('d/m/Y') }}
+                  @else
+                      Sin fecha de publicación.
+                  @endif
+              </small>
               <p class="text-muted">{{ $post->excerpt }}</p>
               @unless($loop->last)
                   <hr>

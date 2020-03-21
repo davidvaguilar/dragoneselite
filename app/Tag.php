@@ -18,7 +18,6 @@ class Tag extends Model
 
                 public function users()
                 {
-                   //dd("sdsad");
                     return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS  belongsToMany  hasMany
                 }
 
