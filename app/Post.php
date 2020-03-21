@@ -32,13 +32,12 @@ class Post extends Model
     }
 
     public function tags(){   // $post->category->name
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class);                     //deberai ser hasMany??  actualmente belongsToMany
     }
 
-            public function users()
-            {
-                return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS
-            }
+    public function users(){
+        return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS
+    }
 
     public function photos(){
         return $this->hasMany(Photo::class);

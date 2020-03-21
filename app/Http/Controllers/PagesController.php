@@ -8,6 +8,7 @@ use App\Post;
 use App\User;
 use App\Category;
 use App\Tag;
+use App\PostTag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,20 +23,12 @@ class PagesController extends Controller
             
         //$query = Post::published();
 
-     
+        $tags = auth()->user()->tags;     //$tags = User::find(auth()->id())->tags()->get();
+        $tagIds = auth()->user()->tags()->pluck('tag_id');       
+        $postIds = PostTag::whereIn('tag_id', $tagIds)->pluck('post_id');
 
-        $query = Post::with(['category', 'tags', 'owner', 'photos'])->published();
-
-        /*$query = Tag::join('post_tag','tags.id','=','post_tag.post_id')
-            ->join('tag_user','tags.id','=','tag_user.tag_id')
-            ->join('posts','posts.id','=','post_tag.post_id')
-            ->join('users','users.id','=','tag_user.user_id')
-            ->where('users.id', '=',  auth()->id() )
-            ->orderBy('posts.published_at', 'desc');*/
-
-
-        //dd($query);
-
+        $query = Post::with(['category', 'tags', 'owner', 'photos'])->find($postIds);
+        //   $query = Post::with(['category', 'tags', 'owner', 'photos'])->published();
 
         if(request('month')){
             $query->whereMonth('published_at', request('month'));
@@ -43,8 +36,7 @@ class PagesController extends Controller
         if(request('year')){
             $query->whereYear('published_at', request('year'));
         }
-        
-        $posts = $query->paginate(1000);
+        $posts = $query;
         //$posts = Post::published()->paginate();
         //$posts = Post::published()->simplePaginate(1);  //ANTERIOR y siguiente
         return view('pages.home', compact('posts')); 
@@ -62,7 +54,6 @@ class PagesController extends Controller
     }
     
     public function archive(){
-        
         //return Post::select('published_at')->groupBy('published_at')->get();
         /*$archive = Post::selectRaw('year(published_at) as year')
                 ->selectRaw('month(published_at) as month')                  

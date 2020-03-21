@@ -13,11 +13,12 @@ class Tag extends Model
     }
 
     public function posts(){
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class);   // base belongsToMany
     }
 
                 public function users()
                 {
+                   //dd("sdsad");
                     return $this->belongsToMany(User::class);    // PERTENECE A MUCHOS  belongsToMany  hasMany
                 }
 

@@ -94,9 +94,10 @@
         <div id="posts-container" class="container-fluid container-posts">
 		@forelse($posts as $post)
 
-            @foreach( $post->tags as $tag )
+
+           {{-- @foreach( $post->tags as $tag )
                 @foreach( $tag->users as $user )
-                    @if( $user->id ==  auth()->id() )
+                    @if( $user->id == auth()->id() )   --}}
 
             <div class="card-post">
                 <div class="row">
@@ -149,9 +150,9 @@
                 </div>
 			</div>
 
-                    @endif
+            {{--        @endif
 			    @endforeach
-		    @endforeach
+		    @endforeach   --}}
 
 		@empty
 

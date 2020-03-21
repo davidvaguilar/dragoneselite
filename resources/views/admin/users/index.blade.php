@@ -22,8 +22,8 @@
             @endcan
         </div>
         <!-- /.box-header -->
-        <div class="box-body">
-            <table id="posts-table" class="table table-bordered table-striped">
+        <div class="box-body table-responsive">
+            <table id="users-table" class="table table-hover table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -101,7 +101,7 @@
     <script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(function () {
-            $('#posts-table').DataTable({
+            $('#users-table').DataTable({
                 'paging'      : true,
                 'lengthChange': false,
                 'searching'   : false,

@@ -21,8 +21,8 @@
 
         </div>
         <!-- /.box-header -->
-        <div class="box-body">
-            <table id="posts-table" class="table table-bordered table-striped">
+        <div class="box-body table-responsive">
+            <table id="posts-table" class="table table-hover table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -39,7 +39,11 @@
                         <tr> 
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->published_at->diffForHumans() }}</td>
+                            <td>
+                                @if ($post->published_at)
+                                    {{ $post->published_at->diffForHumans() }}
+                                @endif
+                            </td>
                             <td>{{ $post->excerpt }}</td>                            
                             <td>{{ $post->category->name }}</td>
                             <td>
@@ -76,7 +80,6 @@
                     @endforeach
                 </tbody>
             </table>
-            
         </div>
         <!-- /.box-body -->
     </div>
@@ -93,9 +96,6 @@
     <script src="{{ asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
-
-            
-
         $(function () {
             $('#posts-table').DataTable({
                 'paging'      : true,
@@ -135,7 +135,5 @@
             })
         })
 
-     
     </script>
-
 @endpush
