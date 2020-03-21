@@ -33,6 +33,7 @@ class NewComment extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.new-comment');
+        return $this->view('emails.new-comment')
+                ->subject('Un nuevo comentario para '.config('app.name'));;
     }
 }

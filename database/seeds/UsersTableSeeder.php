@@ -86,7 +86,7 @@ class UsersTableSeeder extends Seeder
         $admin->name = 'David Villegas Aguilar';
         $admin->email = 'david.villegas.aguilar@gmail.com';
         $admin->adress = 'Heroes de la concepcion - Iquique';
-        $admin->movil = '+56976400180';
+        $admin->movil = '976400180';
         $admin->password = 'I5483114-1984';
         $admin->save();
 
