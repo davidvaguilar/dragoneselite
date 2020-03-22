@@ -2,8 +2,8 @@
 
 @section('header')
     <h1>
-        Posts
-        <small>Crear publicación</small>
+        Publicación
+        <small>Actualizar</small>
     </h1>
     <ol class="breadcrumb">
     <li>
@@ -13,7 +13,7 @@
     </li>
     <li class="active">
         <a href="{{ route('admin.posts.index') }}">
-            <i class="fa fa-list"></i> Posts
+            <i class="fa fa-list"></i> Publicaciones
         </a>
     </li>
     <li class="active">Crear</li>
@@ -52,7 +52,7 @@
             <div class="box box-primary">
                 <div class="box-body">
                     <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                        <label>Titulos de la publicacisson</label>
+                        <label>Titulos de la publicación</label>
                         <input name="title" 
                             class="form-control" 
                             placeholder="Ingresa aqui el titulo de la publicación" 
@@ -60,7 +60,7 @@
                         {!! $errors->first('title', '<span class="help-block">:message</span>' ) !!}                        
                     </div>
                     <div class="form-group {{ $errors->has('body') ? 'has-error' : '' }}">
-                        <label>Contenido de la publicacion</label>
+                        <label>Contenido de la publicación</label>
                         <textarea id="editor"
                             name="body"
                             rows="7" 
@@ -105,7 +105,7 @@
                     <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                         <label>Tipo :</label>
                         <select name="category_id" class="form-control select2">
-                            <option value="">Selecciona una tipo</option>
+                            <option value="">Selecciona un tipo</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"                              
                                     {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }} 
@@ -118,7 +118,7 @@
                         <label>Categorias :</label>  <!--var_dump(old('tags'))-->
                         <select name="tags[]" class="form-control select2" 
                                 multiple="multiple" 
-                                data-placeholder="Seleccione una o mas etiquetas" 
+                                data-placeholder="Seleccione una o mas categorias" 
                                 style="width: 100%;">
                             @foreach ($tags as $tag)
                                 <option {{ collect(old('tags', $post->tags->pluck('id') ))->contains($tag->id) ? 'selected' : '' }} 
@@ -144,7 +144,6 @@
                 </div>
             </div>
         </div>
-        
     </form>
     
 </div>

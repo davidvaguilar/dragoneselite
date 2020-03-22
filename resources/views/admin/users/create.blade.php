@@ -1,8 +1,27 @@
 @extends('admin.layout')
 
+@section('header')
+    <h1>
+        Usuarios
+        <small>Crear</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li>
+        <a href="{{ route('dashboard') }}">
+            <i class="fa fa-dashboard"></i> Inicio
+        </a>
+    </li>
+    <li class="active">
+        <a href="{{ route('admin.users.index') }}">
+            <i class="fa fa-list"></i> Usuarios
+        </a>
+    </li>
+    <li class="active">Crear</li>
+    </ol>
+@stop
+
 @section('content')
 <div class="row">
-
 <form method="POST" action="{{ route('admin.users.store') }}">
   <div class="col-md-6">
     <div class="box box-primary">
@@ -23,7 +42,7 @@
             <input name="name" value="{{ old('name') }}" class="form-control">
           </div>
           <div class="form-group col-md-12">
-            <label for="email">Email:</label>
+            <label for="email">Correo Electronico:</label>
             <input name="email" value="{{ old('email') }}" class="form-control">
           </div>
 
@@ -34,11 +53,11 @@
 
           <div class="form-group col-md-6">
             <label for="phone">Telefono:</label>
-            <input name="phone" value="{{ old('phone') }}" class="form-control">
+            <input name="phone" value="{{ old('phone') }}" placeholder="Ejem: 572456789" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="movil">Celular:</label>
-            <input name="movil" value="{{ old('movil') }}" class="form-control">
+            <input name="movil" value="{{ old('movil') }}" placeholder="Ejem: 912345678" class="form-control">
           </div>
 
           <div class="form-group col-md-12 {{ $errors->has('tags') ? 'has-error' : '' }}">

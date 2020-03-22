@@ -27,7 +27,9 @@ class PagesController extends Controller
         $tagIds = auth()->user()->tags()->pluck('tag_id');       
         $postIds = PostTag::whereIn('tag_id', $tagIds)->pluck('post_id');
 
-        $query = Post::with(['category', 'tags', 'owner', 'photos'])->find($postIds);
+        //$query = Post::find($postIds);
+        $query = Post::with(['category', 'tags', 'owner', 'photos'])->whereIn('id', $postIds)->published();
+
         //   $query = Post::with(['category', 'tags', 'owner', 'photos'])->published();
 
         if(request('month')){
@@ -36,8 +38,8 @@ class PagesController extends Controller
         if(request('year')){
             $query->whereYear('published_at', request('year'));
         }
-        $posts = $query->where('published_at', '!=', null)->where('published_at', '<=', today());
-       // dd($posts);
+       
+       $posts = $query->get();     // ->paginate(1000);
         //$posts = Post::published()->paginate();
         //$posts = Post::published()->simplePaginate(1);  //ANTERIOR y siguiente
         return view('pages.home', compact('posts')); 

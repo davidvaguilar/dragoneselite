@@ -2,12 +2,12 @@
 
 @section('header')
     <h1>
-        Posts
+        Publicaciones
         <small>Listado</small>
     </h1>
     <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-    <li class="active">Posts</li>
+    <li class="active">Publicaciones</li>
     </ol>
 @stop
 
@@ -16,7 +16,7 @@
         <div class="box-header">
             <h3 class="box-title">Listado de publicaciones</h3>
             <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                <i class="fa fa-plus"></i> Crear publicacion
+                <i class="fa fa-plus"></i> Crear publicación
             </button>
 
         </div>

@@ -1,5 +1,25 @@
 @extends('admin.layout')
 
+@section('header')
+    <h1>
+        Usuarios
+        <small>Actualizar</small>
+    </h1>
+    <ol class="breadcrumb">
+    <li>
+        <a href="{{ route('dashboard') }}">
+            <i class="fa fa-dashboard"></i> Inicio
+        </a>
+    </li>
+    <li class="active">
+        <a href="{{ route('admin.users.index') }}">
+            <i class="fa fa-list"></i> Usuarios
+        </a>
+    </li>
+    <li class="active">Actualizar</li>
+    </ol>
+@stop
+
 @section('content')
 <div class="row">
   <div class="col-md-6">
@@ -24,7 +44,7 @@
           </div>
 
           <div class="form-group col-md-12">
-            <label for="email">Email:</label>
+            <label for="email">Correo Electronico:</label>
             <input name="email" value="{{ $user->email }}" class="form-control">
           </div>
 
@@ -35,11 +55,11 @@
 
           <div class="form-group col-md-6">
             <label for="phone">Telefono:</label>
-            <input name="phone" value="{{ old('phone', $user->phone) }}" class="form-control">
+            <input name="phone" value="{{ old('phone', $user->phone) }}" placeholder="Ej: 572456789" class="form-control">
           </div>
           <div class="form-group col-md-6">
             <label for="movil">Celular:</label>
-            <input name="movil" value="{{ old('movil', $user->movil) }}" class="form-control">
+            <input name="movil" value="{{ old('movil', $user->movil) }}" placeholder="Ej: 912345678" class="form-control">
           </div>
 
           <div class="form-group col-md-6">
@@ -56,7 +76,7 @@
               <label>Categorias :</label>  <!--var_dump(old('tags'))-->
               <select name="tags[]" class="form-control select2" 
                       multiple="multiple" 
-                      data-placeholder="Seleccione una o mas etiquetas" 
+                      data-placeholder="Seleccione una o mas categorias" 
                       style="width: 100%;">
                   @foreach ($tags as $tag)
                       <option {{ collect(old('tags', $user->tags->pluck('id') ))->contains($tag->id) ? 'selected' : '' }} 

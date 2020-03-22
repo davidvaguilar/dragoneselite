@@ -97,14 +97,14 @@
             <div class="card-post">
                 <div class="row">
                     <div class="col-xs-3 col-sm-2">
-                        <a href="personal-profile.html" title="Profile">
+                        <!-- <a href="personal-profile.html" title="Profile">-->
                             <img src="{{ asset('socialyte/img/user.jpg') }}" alt="User name" class="img-circle img-user">
-                        </a>
+                        <!-- </a> -->
                     </div>
                     <div class="col-xs-9 col-sm-10 info-user">
-                        <h3><a href="personal-profile.html" title="Profile">{{ $post->title }}</a></h3>
+                        <h2>{{ $post->title }}</h2> <!-- <a href="personal-profile.html" title="Profile"></a> -->
 						<p><i>{{ $post->published_at->diffForHumans() }} / {{ $post->owner->name }}</i></p><br>
-						<h3><a href="personal-profile.html" title="Profile">{{ $post->excerpt }}</a></h3>
+						<h3>{{ $post->excerpt }}</h3> <!-- <a href="personal-profile.html" title="Profile"></a> -->
                     </div>
                 </div>
                 <div class="row">
@@ -113,7 +113,7 @@
 						
 						@include( $post->viewType() )
                         
-                        <div class="reaction">
+                        {{-- <div class="reaction">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request()->fullUrl() }}&title={{ $post->title }}"
                                     class="btn btn-xs btn-primary"
                                     title="Compartir en Facebook"
@@ -124,7 +124,7 @@
                                     target="_blank" 
                                     title="Tweet"
                                 ><i class="fa fa-fw fa-twitter-square"></i></a>
-                        </div>
+                        </div>  --}}
                         <div class="comments">
                             <div class="more-comments">
 							@foreach( $post->tags as $tag)	
